@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import audioSrc from '$lib/bell.webm';
 
 	let running = false;
 
@@ -8,8 +9,8 @@
 	let numWork = 0;
 
 	let config = {
-		work: 25,
-		shortBreak: 5,
+		work: 0.1,
+		shortBreak: 0.1,
 		longBreak: 15
 	};
 
@@ -31,22 +32,35 @@
 
 	onMount(() => {
 		timeLeft = config.work * 60 * 1000;
+		// load notification
+		let notification = Notification.permission;
 	});
+
+	// $: notification = Notification.permission;
 
 	const updateTiming = (past: Date) => {
 		const date = new Date();
 		if (running) {
 			timeLeft = timeLeft - (date.getTime() - past.getTime());
 			if (timeLeft < 0) {
+				// play audio
+				audio?.play();
+				// send notification if we should
 				switch (state) {
 					case State.Working: {
 						numWork += 1;
 						if (numWork % 4 === 0) {
 							state = State.LongBreaking;
 							timeLeft = config.longBreak * 60 * 1000;
+							// if (notification === 'granted') {
+							// 	new Notification('time for a long break!');
+							// }
 						} else {
 							state = State.ShortBreaking;
 							timeLeft = config.shortBreak * 60 * 1000;
+							// if (notification === 'granted') {
+							// 	new Notification('time for a short break!');
+							// }
 						}
 						break;
 					}
@@ -54,6 +68,9 @@
 					case State.LongBreaking: {
 						state = State.Working;
 						timeLeft = config.work * 60 * 1000;
+						// if (notification === 'granted') {
+						// 	new Notification('time to work!');
+						// }
 						break;
 					}
 				}
@@ -65,13 +82,23 @@
 		}
 	};
 
+	let audio: HTMLAudioElement | null = null;
+
 	const toggleRunning = () => {
-		// Turn to pause
+		if (audio) {
+			audio.pause();
+			audio.currentTime = 0;
+		}
+		// stop all playing audio
+		// reset its time to 0
 		running = !running;
 		updateTiming(new Date());
 	};
+
+	const requestNotification = () => Notification.requestPermission();
 </script>
 
+<audio bind:this={audio} src="{audioSrc}" />
 <div class="main">
 	<div class="wrapper">
 		<div class="state">
@@ -83,6 +110,9 @@
 	</div>
 </div>
 
+<!-- {#if notification !== 'denied'}
+	<div class="notification-bell" on:click={requestNotification}>notify me</div>
+{/if} -->
 <style lang="scss">
 	$black: #292828;
 
@@ -136,6 +166,13 @@
 		&:hover {
 			cursor: pointer;
 		}
-		// background-color: transparent;
+	}
+
+	.notification-bell {
+		font-family: Arial, Helvetica, sans-serif;
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 1rem;
 	}
 </style>
