@@ -30,13 +30,13 @@
 	$: minLeft = Math.floor((timeLeft / (60 * 1000)) % 60);
 	$: secLeft = Math.floor((timeLeft / 1000) % 60);
 
+	let notification: string;
+
 	onMount(() => {
 		timeLeft = config.work * 60 * 1000;
 		// load notification
-		let notification = Notification.permission;
+		notification = Notification.permission;
 	});
-
-	// $: notification = Notification.permission;
 
 	const updateTiming = (past: Date) => {
 		const date = new Date();
@@ -52,15 +52,15 @@
 						if (numWork % 4 === 0) {
 							state = State.LongBreaking;
 							timeLeft = config.longBreak * 60 * 1000;
-							// if (notification === 'granted') {
-							// 	new Notification('time for a long break!');
-							// }
+							if (notification === 'granted') {
+								new Notification('time for a long break!');
+							}
 						} else {
 							state = State.ShortBreaking;
 							timeLeft = config.shortBreak * 60 * 1000;
-							// if (notification === 'granted') {
-							// 	new Notification('time for a short break!');
-							// }
+							if (notification === 'granted') {
+								new Notification('time for a short break!');
+							}
 						}
 						break;
 					}
@@ -68,9 +68,9 @@
 					case State.LongBreaking: {
 						state = State.Working;
 						timeLeft = config.work * 60 * 1000;
-						// if (notification === 'granted') {
-						// 	new Notification('time to work!');
-						// }
+						if (notification === 'granted') {
+							new Notification('time to work!');
+						}
 						break;
 					}
 				}
@@ -95,10 +95,11 @@
 		updateTiming(new Date());
 	};
 
-	const requestNotification = () => Notification.requestPermission();
+	const requestNotification = () =>
+		Notification.requestPermission().then((permission) => (notification = permission));
 </script>
 
-<audio bind:this={audio} src="{audioSrc}" />
+<audio bind:this={audio} src={audioSrc} />
 <div class="main">
 	<div class="wrapper">
 		<div class="state">
@@ -109,10 +110,10 @@
 		<button on:click={toggleRunning}>{label}</button>
 	</div>
 </div>
-
-<!-- {#if notification !== 'denied'}
+{#if notification !== 'denied' && notification !== 'granted'}
 	<div class="notification-bell" on:click={requestNotification}>notify me</div>
-{/if} -->
+{/if}
+
 <style lang="scss">
 	$black: #292828;
 
