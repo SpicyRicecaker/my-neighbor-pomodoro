@@ -9,8 +9,8 @@
 	let numWork = 0;
 
 	let config = {
-		work: 0.1,
-		shortBreak: 0.1,
+		work: 25,
+		shortBreak: 5,
 		longBreak: 15
 	};
 
@@ -20,7 +20,7 @@
 		LongBreaking
 	}
 
-	const stateLabelArray = ['Working', 'Short Break', 'Long Break'];
+	const stateLabelArray = ['working', 'Short break', 'Long break'];
 
 	let state: State = State.Working;
 	$: stateLabel = stateLabelArray[state];
@@ -106,7 +106,9 @@
 			<div class="first">{stateLabel}</div>
 			<div class="second">{numWork + 1}</div>
 		</div>
-		<div class="time">{minLeft}:{secLeft}</div>
+		<div class="time">
+			{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}
+		</div>
 		<button on:click={toggleRunning}>{label}</button>
 	</div>
 </div>
@@ -141,26 +143,27 @@
 	}
 	.state {
 		font-size: 1rem;
-		align-self: center;
-		justify-self: center;
 		display: flex;
 		& > .first {
 			color: white;
 			background-color: $black;
-			padding: 0.2rem 2rem;
+			text-align: center;
+			padding-top: 0.2rem;
+			padding-bottom: 0.2rem;
 			flex: 1;
 		}
 		& > .second {
 			color: $black;
 			background-color: white;
-			padding: 0.2rem 1rem;
+			padding: 0.2rem 0.5rem;
 			flex: 0;
 		}
 	}
 	button {
 		font-size: 1rem;
-		padding: 0.2rem 1rem;
 		color: white;
+		padding-top: 0.2rem;
+		padding-bottom: 0.2rem;
 		background-color: $black;
 		border: none;
 		outline: none;
