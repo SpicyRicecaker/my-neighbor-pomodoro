@@ -1,4 +1,4 @@
-<svg
+<svg on:click
    width="100%"
    height="100%"
    viewBox="0 0 17.668 17.668255"

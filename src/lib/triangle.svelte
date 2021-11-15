@@ -1,5 +1,5 @@
 <!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?> -->
-<svg
+<svg on:click
    width="100%"
    height="100%"
    viewBox="0 0 21.883971 18.956333"

@@ -1,4 +1,4 @@
-<svg
+<svg on:click
    width="6.069191mm"
    height="7.0080981mm"
    viewBox="0 0 6.0691911 7.0080983"
@@ -18,3 +18,10 @@
        d="m 399.42054,847.6998 0,-12.3996 10.73837,6.1998 z" />
   </g>
 </svg>
+
+<style>
+   svg {
+      height: 1rem;
+      width: 1rem;
+   }
+</style>

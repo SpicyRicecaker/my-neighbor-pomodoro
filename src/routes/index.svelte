@@ -10,7 +10,7 @@
 
 	let running = false;
 
-	$: label = running ? 'stop' : 'start';
+	// $: label = running ? 'stop' : 'start';
 
 	let numWork = 0;
 
@@ -50,7 +50,7 @@
 	const stateLabelArray = ['Working', 'Short break', 'Long break'];
 
 	let state: State = State.Working;
-	$: stateLabel = stateLabelArray[state];
+	// $: stateLabel = stateLabelArray[state];
 
 	let timeLeft: number = 0;
 
@@ -156,13 +156,8 @@
 				{/each}
 			</div>
 		</div>
-		<!-- <div class="state"> -->
-		<!-- <div class="state-label">{stateLabel}</div>
-			<div class="first" /> -->
-		<!-- <div class="second"><div>{numWork + 1}</div></div> -->
-		<!-- </div> -->
+		<div class="count"><div>{numWork + 1}</div></div>
 		<div class="time">
-			<!-- {minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')} -->
 			<svg
 				width="100%"
 				height="100%"
@@ -178,11 +173,16 @@
 			</svg>
 		</div>
 		<div class="state">
-			<div class="state-label">{label}</div>
+			<div class="button">
+				{#if running}
+					<Pause on:click={toggleRunning} />
+				{:else}
+					<Play on:click={toggleRunning} />
+				{/if}
+				<div on:click={() => nextState(false)}><Ff /></div>
+			</div>
+			<!-- <div class="state-label">{label}</div> -->
 			<!-- <button on:click={toggleRunning} /> -->
-			<Play />
-			<Pause />
-			<div on:click={() => nextState(false)} class="second"><Ff /></div>
 		</div>
 	</div>
 </div>
@@ -199,35 +199,7 @@
 		width: 100%;
 		height: 100%;
 	}
-	.option {
-		position: absolute;
-		top: -45%;
-		left: 0;
 
-		width: 100%;
-		// max-width: 13rem;
-
-		align-items: center;
-		justify-items: center;
-		& > div {
-			padding-left: 2rem;
-			padding-right: 2rem;
-			display: grid;
-			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-		}
-
-		& > * {
-			align-self: center;
-			justify-self: center;
-		}
-		// width: 5rem;
-
-		// display: grid;
-		// grid-template-columns: 1fr 1fr 1fr;
-		& > .selected {
-			color: rgb(124, 165, 255);
-		}
-	}
 	.wrapper {
 		position: relative;
 		align-self: center;
@@ -244,10 +216,43 @@
 		height: 9rem;
 		max-height: 9rem;
 
-		// overflow: hidden;
+		& > .count {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			color: $black;
+			opacity: 50%;
+		}
 
-		// display: grid;
-		// grid-template-rows: minmax(0, 1fr) minmax(0, 3.5fr) minmax(0, 1fr);
+		& > .option {
+			position: absolute;
+			top: -45%;
+			left: 0;
+
+			width: 100%;
+			// max-width: 13rem;
+
+			align-items: center;
+			justify-items: center;
+			& > div {
+				padding-left: 2rem;
+				padding-right: 2rem;
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+			}
+
+			& > * {
+				align-self: center;
+				justify-self: center;
+			}
+			// width: 5rem;
+
+			// display: grid;
+			// grid-template-columns: 1fr 1fr 1fr;
+			& > .selected {
+				color: rgb(124, 165, 255);
+			}
+		}
 	}
 	.main {
 		width: 100%;
@@ -269,7 +274,7 @@
 			height: 100%;
 			& > text {
 				fill: $black;
-				opacity: 80%;
+				opacity: 70%;
 			}
 		}
 	}
@@ -278,45 +283,28 @@
 		font-size: 1rem;
 
 		// Declare the right 1 will always be 2rem, otherwise fill
-		display: grid;
-		grid-template-columns: auto 2rem;
 
 		// Center the label by self, not each individual container
 		position: absolute;
 
-		top: 150%;
+		top: 130%;
+		left: 0;
+		width: 100%;
 
-		& > .state-label {
-			// Answer from user Hashem Qolami at https://stackoverflow.com/a/25776315
-			// Centers absolute container
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+		display: grid;
 
-			// Styling
-			color: white;
-
-			pointer-events: none;
-		}
-		& > .first {
-			// Styling
-			background-color: $black;
-		}
-
-		& > .second {
-			// Center the number
-			display: flex;
-			justify-content: center;
-			& > div {
-				align-self: center;
+		& > .button {
+			align-self: center;
+			justify-self: center;
+			position: relative;
+			&:hover {
+				cursor: pointer;
 			}
-
-			// Styling opposite of the rest of the box
-			color: $black;
-			background-color: white;
-
-			// border: 0.05rem inset $black;
+			& > div {
+				position: absolute;
+				top: 0;
+				left: 150%;
+			}
 		}
 	}
 	button {
