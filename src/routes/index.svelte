@@ -184,19 +184,12 @@
 	</div>
 </div>
 {#if notification !== 'denied' && notification !== 'granted'}
-	<div class="notification-bell" on:click={requestNotification}>notify me</div>
+	<div class="link notification" on:click={requestNotification}>notify me</div>
 {/if}
-<a class="back" href="/options">options</a>
+<a class="link" href="/options">options</a>
 
 <style lang="scss">
-	$black: #292828;
-
-	:global(html, body, #svelte) {
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		height: 100%;
-	}
+	@import '../lib/styles.scss';
 
 	.wrapper {
 		position: relative;
@@ -288,40 +281,7 @@
 			}
 		}
 	}
-
-	.notification-bell {
-		color: $black;
-		opacity: 80%;
-		font-family: Arial, Helvetica, sans-serif;
-		position: absolute;
-		top: 2rem;
-		right: 0;
-		margin: 1rem;
-		&:hover {
-			cursor: pointer;
-		}
-		text-decoration: none;
-		&:visited {
-			text-decoration: none;
-			color: $black;
-		}
-
-	}
-	.back {
-		color: $black;
-		opacity: 80%;
-		font-family: Arial, Helvetica, sans-serif;
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin: 1rem;
-		text-decoration: none;
-		&:hover {
-			cursor: pointer;
-		}
-		&:visited {
-			text-decoration: none;
-			color: $black;
-		}
+	.notification {
+		top: 1.5rem;
 	}
 </style>

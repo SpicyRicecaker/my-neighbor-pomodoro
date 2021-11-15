@@ -19,17 +19,11 @@
 	</div>
 </div>
 
-<a class="back" href="/">back</a>
+<a class="link" href="/">back</a>
 
 <style lang="scss">
-	$black: #292828;
+	@import '../lib/styles.scss';
 
-	:global(html, body, #svelte) {
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		height: 100%;
-	}
 	.main {
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 2rem;
@@ -57,23 +51,6 @@
 					}
 				}
 			}
-		}
-	}
-	.back {
-		color: $black;
-		opacity: 80%;
-		font-family: Arial, Helvetica, sans-serif;
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin: 1rem;
-		text-decoration: none;
-		&:hover {
-			cursor: pointer;
-		}
-		&:visited {
-			text-decoration: none;
-			color: $black;
 		}
 	}
 </style>
