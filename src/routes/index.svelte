@@ -4,24 +4,53 @@
 	import Ff from '$lib/ff.svelte';
 	import Play from '$lib/play.svelte';
 	import Pause from '$lib/pause.svelte';
+	// TODO currently very inefficient loading of svgs
 	import Square from '$lib/square.svelte';
 	import Triangle from '$lib/triangle.svelte';
 	import Circle from '$lib/circle.svelte';
 
-	let running = false;
-
-	// $: label = running ? 'stop' : 'start';
-
-	let numWork = 0;
-
 	let config = {
-		work: 25,
-		shortBreak: 5,
-		longBreak: 15
+		work: 0.01,
+		shortBreak: 0.2,
+		longBreak: 0.2
 	};
 
-	const setState = (newState: State) => {
-		setRunningTo(false);
+	let running = false;
+	let numWork = 0;
+
+	// State enum, at any given point we can be either working, short breaking, or long breaking
+	enum State {
+		Working,
+		ShortBreaking,
+		LongBreaking
+	}
+	let state: State = State.Working;
+	// Array of symbols that represent each state
+	const stateSvgArray = [Triangle, Square, Circle];
+
+	// Time left in our current state
+	let timeLeft: number = config.work * 60 * 1000;
+
+	// Automatic time
+	$: minLeft = Math.floor((timeLeft / (60 * 1000)) % 60);
+	$: secLeft = Math.floor((timeLeft / 1000) % 60);
+
+	// Whether notifications have been accepeted by our user or not
+	let notification: string;
+
+	onMount(() => {
+		// On loading of html, record our notification state (i.e. 'granted', 'denied' as a string)
+		notification = Notification.permission;
+	});
+
+	// Stores the id of the recursive timer function, should we desire to stop it at any given time
+	let timerId: any = null;
+
+	// Function that sets current state to new state
+	const setState = (newState: State, userToggled: boolean) => {
+		// First disable running
+		setRunningTo(false, userToggled);
+		// Then set state and remainingtime accordingly
 		state = newState;
 		switch (state) {
 			case State.Working: {
@@ -39,66 +68,34 @@
 		}
 	};
 
-	enum State {
-		Working,
-		ShortBreaking,
-		LongBreaking
-	}
-
-	const stateSvgArray = [Triangle, Square, Circle];
-
-	// const stateLabelArray = ['Working', 'Short break', 'Long break'];
-
-	let state: State = State.Working;
-	// $: stateLabel = stateLabelArray[state];
-
-	let timeLeft: number = 0;
-
-	$: minLeft = Math.floor((timeLeft / (60 * 1000)) % 60);
-	$: secLeft = Math.floor((timeLeft / 1000) % 60);
-
-	let notification: string;
-
-	onMount(() => {
-		timeLeft = config.work * 60 * 1000;
-		// load notification
-		notification = Notification.permission;
-	});
-
-	let timerId: any = null;
-
 	const nextState = (playNotification: boolean) => {
+		let notification = '';
 		// Also set timer
 		switch (state) {
 			case State.Working: {
 				numWork += 1;
 				if (numWork % 4 === 0) {
-					state = State.LongBreaking;
-					timeLeft = config.longBreak * 60 * 1000;
-					if (playNotification) {
-						new Notification('time for a long break!');
-					}
+					setState(State.LongBreaking, false);
+					notification = 'time for a long break!';
 				} else {
-					state = State.ShortBreaking;
-					timeLeft = config.shortBreak * 60 * 1000;
-					if (playNotification) {
-						new Notification('time for a short break!');
-					}
+					setState(State.ShortBreaking, false);
+					notification = 'time for a break!';
 				}
 				break;
 			}
 			case State.ShortBreaking:
 			case State.LongBreaking: {
-				state = State.Working;
-				timeLeft = config.work * 60 * 1000;
-				if (playNotification) {
-					new Notification('time to work!');
-				}
+				setState(State.ShortBreaking, false);
+				notification = 'time to work!';
 				break;
 			}
 		}
+		if (playNotification) {
+			new Notification(notification);
+		}
 	};
 
+	// The core 'game loop' of our clock
 	const updateTiming = (past: Date) => {
 		const date = new Date();
 		if (running) {
@@ -110,20 +107,23 @@
 				const playNotification = notification === 'granted';
 				// update state, clock, and give notification
 				nextState(playNotification);
-				running = false;
 			} else {
 				timerId = setTimeout(updateTiming, 1000, date);
 			}
 		}
 	};
 
+	// Holds the audio element that stores the alarm song
 	let audio: HTMLAudioElement | null = null;
 
-	const setRunningTo = (newRunningState: boolean) => {
+	// Set running to a state
+	const setRunningTo = (newRunningState: boolean, userToggled: boolean) => {
 		// Always pause audio no matter what
-		if (audio) {
-			audio.pause();
-			audio.currentTime = 0;
+		if (userToggled) {
+			if (audio) {
+				audio.pause();
+				audio.currentTime = 0;
+			}
 		}
 		// If our desired new running state is true
 		if (newRunningState) {
@@ -137,13 +137,12 @@
 		}
 	};
 
-	const toggleRunning = () => setRunningTo(!running);
+	// Toggle running
+	const toggleRunning = () => setRunningTo(!running, true);
+
+	// Request notification
 	const requestNotification = () =>
 		Notification.requestPermission().then((permission) => (notification = permission));
-
-	// 	<!-- <div class={state === i ? 'selected' : ''} on:click={() => setState(i)}>
-	// 	{label}
-	// </div> -->
 </script>
 
 <audio bind:this={audio} src={audioSrc} />
@@ -152,7 +151,11 @@
 		<div class="option">
 			<div>
 				{#each stateSvgArray as s, i}
-					<svelte:component this={s} color={state === i ? '400000' : '000000'} on:click={() => setState(i)}/>
+					<svelte:component
+						this={s}
+						color={state === i ? '400000' : '000000'}
+						on:click={() => setState(i, true)}
+					/>
 				{/each}
 			</div>
 		</div>
@@ -181,8 +184,6 @@
 				{/if}
 				<div on:click={() => nextState(false)}><Ff /></div>
 			</div>
-			<!-- <div class="state-label">{label}</div> -->
-			<!-- <button on:click={toggleRunning} /> -->
 		</div>
 	</div>
 </div>
@@ -230,7 +231,6 @@
 			left: 0;
 
 			width: 100%;
-			// max-width: 13rem;
 
 			align-items: center;
 			justify-items: center;
@@ -240,18 +240,6 @@
 				display: grid;
 				grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 			}
-
-			& > * {
-				align-self: center;
-				justify-self: center;
-			}
-			// width: 5rem;
-
-			// display: grid;
-			// grid-template-columns: 1fr 1fr 1fr;
-			& > .selected {
-				color: rgb(124, 165, 255);
-			}
 		}
 	}
 	.main {
@@ -259,13 +247,9 @@
 		height: 100%;
 		display: grid;
 
-		// grid-template-rows: auto minmax(0, 1fr);
-
 		font-family: Arial, Helvetica, sans-serif;
 	}
 	.time {
-		// font-size: 5.2rem;
-		// color: $black;
 		width: 100%;
 		height: 100%;
 		& > svg {
@@ -305,16 +289,6 @@
 				top: 0;
 				left: 150%;
 			}
-		}
-	}
-	button {
-		font-size: 1rem;
-		color: white;
-		background-color: $black;
-		border: none;
-		outline: none;
-		&:hover {
-			cursor: pointer;
 		}
 	}
 

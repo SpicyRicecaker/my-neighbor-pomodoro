@@ -1,6 +1,5 @@
-<svg on:click
-	width="5.9539mm"
-	height="7.0816mm"
+<svg
+	on:click
 	version="1.1"
 	viewBox="0 0 5.9539 7.0816"
 	xmlns="http://www.w3.org/2000/svg"
@@ -14,6 +13,6 @@
 <style>
 	svg {
 		height: 1rem;
-        width: 1rem;
+		width: 1rem;
 	}
 </style>
