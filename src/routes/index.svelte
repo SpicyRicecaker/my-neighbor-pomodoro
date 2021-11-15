@@ -47,7 +47,7 @@
 
 	const stateSvgArray = [Triangle, Square, Circle];
 
-	const stateLabelArray = ['Working', 'Short break', 'Long break'];
+	// const stateLabelArray = ['Working', 'Short break', 'Long break'];
 
 	let state: State = State.Working;
 	// $: stateLabel = stateLabelArray[state];
@@ -152,7 +152,7 @@
 		<div class="option">
 			<div>
 				{#each stateSvgArray as s, i}
-					<svelte:component this={s} />
+					<svelte:component this={s} color={state === i ? '400000' : '000000'} on:click={() => setState(i)}/>
 				{/each}
 			</div>
 		</div>

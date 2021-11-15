@@ -1,3 +1,7 @@
+<script>
+   export let color = "000000";
+</script>
+
 <svg on:click
    width="100%"
    height="100%"
@@ -12,7 +16,7 @@
      id="layer1"
      transform="translate(-27.488621,-96.634823)">
     <rect
-       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#{color};stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
        id="rect17133"
        width="15.516"
        height="15.516255"

@@ -1,3 +1,7 @@
+<script>
+   export let color = "000000";
+</script>
+
 <svg on:click
    width="100%"
    height="100%"
@@ -12,7 +16,7 @@
      id="layer1"
      transform="translate(-27.426906,-96.91331)">
     <circle
-       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.96158;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#{color};stroke-width:1.96158;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
        id="path13523"
        cx="36.248932"
        cy="105.73534"

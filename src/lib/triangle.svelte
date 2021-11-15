@@ -1,4 +1,7 @@
-<!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?> -->
+<script>
+   export let color = "000000";
+</script>
+
 <svg on:click
    width="100%"
    height="100%"
@@ -13,7 +16,7 @@
      id="layer1"
      transform="translate(-25.648652,-95.602973)">
     <path
-       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:18.8976;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#{color};stroke-width:18.8976;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
        id="path16239"
        transform="matrix(0.00571134,-0.12383225,0.12383225,0.00571134,29.767004,64.122625)"
        d="M -270.02191,67.505482 -391.08421,145.11575 -397.76552,1.4675861 Z" />
