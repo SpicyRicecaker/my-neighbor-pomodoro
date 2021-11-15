@@ -64,6 +64,12 @@
 		}
 	};
 
+	const ensureNextState = () => {
+		if (confirm("Are you sure you want to skip the rest of the Pomodoro?")) {
+			nextState(false);
+		} 	
+	}
+
 	const nextState = (playNotification: boolean) => {
 		let notification = '';
 		// Also set timer
@@ -178,7 +184,7 @@
 				{:else}
 					<Play on:click={toggleRunning} />
 				{/if}
-				<div on:click={() => nextState(true)}><Ff /></div>
+				<div on:click={ensureNextState}><Ff /></div>
 			</div>
 		</div>
 	</div>
