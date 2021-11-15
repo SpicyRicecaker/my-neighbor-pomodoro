@@ -9,11 +9,7 @@
 	import Triangle from '$lib/triangle.svelte';
 	import Circle from '$lib/circle.svelte';
 
-	let config = {
-		work: 0.01,
-		shortBreak: 0.2,
-		longBreak: 0.2
-	};
+	import { config } from '$lib/store';
 
 	let running = false;
 	let numWork = 0;
@@ -29,7 +25,7 @@
 	const stateSvgArray = [Triangle, Square, Circle];
 
 	// Time left in our current state
-	let timeLeft: number = config.work * 60 * 1000;
+	let timeLeft: number = $config.work * 60 * 1000;
 
 	// Automatic time
 	$: minLeft = Math.floor((timeLeft / (60 * 1000)) % 60);
@@ -54,15 +50,15 @@
 		state = newState;
 		switch (state) {
 			case State.Working: {
-				timeLeft = config.work * 60 * 1000;
+				timeLeft = $config.work * 60 * 1000;
 				break;
 			}
 			case State.ShortBreaking: {
-				timeLeft = config.shortBreak * 60 * 1000;
+				timeLeft = $config.shortBreak * 60 * 1000;
 				break;
 			}
 			case State.LongBreaking: {
-				timeLeft = config.longBreak * 60 * 1000;
+				timeLeft = $config.longBreak * 60 * 1000;
 				break;
 			}
 		}
@@ -190,6 +186,7 @@
 {#if notification !== 'denied' && notification !== 'granted'}
 	<div class="notification-bell" on:click={requestNotification}>notify me</div>
 {/if}
+<a class="back" href="/options">options</a>
 
 <style lang="scss">
 	$black: #292828;
@@ -293,13 +290,38 @@
 	}
 
 	.notification-bell {
+		color: $black;
+		opacity: 80%;
+		font-family: Arial, Helvetica, sans-serif;
+		position: absolute;
+		top: 2rem;
+		right: 0;
+		margin: 1rem;
+		&:hover {
+			cursor: pointer;
+		}
+		text-decoration: none;
+		&:visited {
+			text-decoration: none;
+			color: $black;
+		}
+
+	}
+	.back {
+		color: $black;
+		opacity: 80%;
 		font-family: Arial, Helvetica, sans-serif;
 		position: absolute;
 		top: 0;
 		right: 0;
 		margin: 1rem;
+		text-decoration: none;
 		&:hover {
 			cursor: pointer;
+		}
+		&:visited {
+			text-decoration: none;
+			color: $black;
 		}
 	}
 </style>
