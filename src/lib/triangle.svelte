@@ -1,7 +1,7 @@
 <!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?> -->
 <svg
-   width="21.88397mm"
-   height="18.956333mm"
+   width="100%"
+   height="100%"
    viewBox="0 0 21.883971 18.956333"
    version="1.1"
    id="svg154"
@@ -19,3 +19,9 @@
        d="M -270.02191,67.505482 -391.08421,145.11575 -397.76552,1.4675861 Z" />
   </g>
 </svg>
+
+<style>
+   svg {
+      height: 3rem;
+   }
+</style>

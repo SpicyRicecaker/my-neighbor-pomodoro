@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import audioSrc from '$lib/bell.webm';
-	import Triangle from '$lib/triangle.svelte';
 	import Ff from '$lib/ff.svelte';
 	import Play from '$lib/play.svelte';
 	import Pause from '$lib/pause.svelte';
@@ -141,23 +140,26 @@
 	const toggleRunning = () => setRunningTo(!running);
 	const requestNotification = () =>
 		Notification.requestPermission().then((permission) => (notification = permission));
+
+	// 	<!-- <div class={state === i ? 'selected' : ''} on:click={() => setState(i)}>
+	// 	{label}
+	// </div> -->
 </script>
 
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
 	<div class="wrapper">
 		<div class="option">
-			{#each stateSvgArray as s, i}
-				<svelte:component this={s} />
-				<!-- <div class={state === i ? 'selected' : ''} on:click={() => setState(i)}>
-				{label}
-			</div> -->
-			{/each}
+			<div>
+				{#each stateSvgArray as s, i}
+					<svelte:component this={s} />
+				{/each}
+			</div>
 		</div>
 		<!-- <div class="state"> -->
 		<!-- <div class="state-label">{stateLabel}</div>
 			<div class="first" /> -->
-		<div class="second"><div>{numWork + 1}</div></div>
+		<!-- <div class="second"><div>{numWork + 1}</div></div> -->
 		<!-- </div> -->
 		<div class="time">
 			<!-- {minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')} -->
@@ -170,7 +172,7 @@
 				xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 			>
-				<text x="0" y="80" font-size="90"
+				<text x="0" y="70" font-size="57"
 					>{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}</text
 				>
 			</svg>
@@ -198,49 +200,76 @@
 		height: 100%;
 	}
 	.option {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		position: absolute;
+		top: -45%;
+		left: 0;
+
+		width: 100%;
+		// max-width: 13rem;
+
+		align-items: center;
+		justify-items: center;
 		& > div {
-			margin: 0 auto;
+			padding-left: 2rem;
+			padding-right: 2rem;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 		}
+
+		& > * {
+			align-self: center;
+			justify-self: center;
+		}
+		// width: 5rem;
+
+		// display: grid;
+		// grid-template-columns: 1fr 1fr 1fr;
 		& > .selected {
 			color: rgb(124, 165, 255);
 		}
 	}
 	.wrapper {
 		position: relative;
-
 		align-self: center;
 		justify-self: center;
+
+		padding: 1rem 2rem 1rem 2rem;
+
+		border-radius: 1rem;
+		// box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]
+		box-shadow: 1rem 1.5rem 3rem #00000025;
 
 		width: 13rem;
 		max-width: 13rem;
 		height: 9rem;
 		max-height: 9rem;
 
-		overflow: hidden;
+		// overflow: hidden;
 
-		display: grid;
-		grid-template-rows: minmax(0, 1fr) minmax(0, 3.5fr) minmax(0, 1fr);
+		// display: grid;
+		// grid-template-rows: minmax(0, 1fr) minmax(0, 3.5fr) minmax(0, 1fr);
 	}
 	.main {
 		width: 100%;
 		height: 100%;
 		display: grid;
 
-		grid-template-rows: auto minmax(0, 1fr);
+		// grid-template-rows: auto minmax(0, 1fr);
 
 		font-family: Arial, Helvetica, sans-serif;
 	}
 	.time {
 		// font-size: 5.2rem;
 		// color: $black;
+		width: 100%;
+		height: 100%;
 		& > svg {
 			display: block;
 			width: 100%;
 			height: 100%;
 			& > text {
 				fill: $black;
+				opacity: 80%;
 			}
 		}
 	}
@@ -253,7 +282,9 @@
 		grid-template-columns: auto 2rem;
 
 		// Center the label by self, not each individual container
-		position: relative;
+		position: absolute;
+
+		top: 150%;
 
 		& > .state-label {
 			// Answer from user Hashem Qolami at https://stackoverflow.com/a/25776315
@@ -285,7 +316,7 @@
 			color: $black;
 			background-color: white;
 
-			border: 0.05rem inset $black;
+			// border: 0.05rem inset $black;
 		}
 	}
 	button {

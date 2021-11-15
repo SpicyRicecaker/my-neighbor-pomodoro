@@ -1,6 +1,6 @@
 <svg
-   width="17.644053mm"
-   height="17.644053mm"
+   width="100%"
+   height="100%"
    viewBox="0 0 17.644053 17.644053"
    version="1.1"
    id="svg154"
@@ -19,3 +19,9 @@
        r="7.8412361" />
   </g>
 </svg>
+
+<style>
+   svg {
+      height: 3rem;
+   }
+</style>
