@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import audioSrc from '$lib/bell.webm';
+	import Triangle from '$lib/triangle.svelte';
+	import Ff from '$lib/ff.svelte';
+	import Play from '$lib/play.svelte';
+	import Pause from '$lib/pause.svelte';
+	import Square from '$lib/square.svelte';
+	import Triangle from '$lib/triangle.svelte';
+	import Circle from '$lib/circle.svelte';
 
 	let running = false;
 
@@ -38,6 +45,8 @@
 		ShortBreaking,
 		LongBreaking
 	}
+
+	const stateSvgArray = [Triangle, Square, Circle];
 
 	const stateLabelArray = ['Working', 'Short break', 'Long break'];
 
@@ -136,19 +145,20 @@
 
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
-	<div class="option">
-		{#each stateLabelArray as label, i}
-			<div on:click={() => setState(i)}>
-				{label}
-			</div>
-		{/each}
-	</div>
 	<div class="wrapper">
-		<div class="state">
-			<div class="state-label">{stateLabel}</div>
-			<div class="first" />
-			<div class="second"><div>{numWork + 1}</div></div>
+		<div class="option">
+			{#each stateSvgArray as s, i}
+				<svelte:component this={s} />
+				<!-- <div class={state === i ? 'selected' : ''} on:click={() => setState(i)}>
+				{label}
+			</div> -->
+			{/each}
 		</div>
+		<!-- <div class="state"> -->
+		<!-- <div class="state-label">{stateLabel}</div>
+			<div class="first" /> -->
+		<div class="second"><div>{numWork + 1}</div></div>
+		<!-- </div> -->
 		<div class="time">
 			<!-- {minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')} -->
 			<svg
@@ -167,8 +177,10 @@
 		</div>
 		<div class="state">
 			<div class="state-label">{label}</div>
-			<button on:click={toggleRunning} />
-			<div on:click={() => nextState(false)} class="second"><div>▶</div></div>
+			<!-- <button on:click={toggleRunning} /> -->
+			<Play />
+			<Pause />
+			<div on:click={() => nextState(false)} class="second"><Ff /></div>
 		</div>
 	</div>
 </div>
@@ -188,8 +200,16 @@
 	.option {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
+		& > div {
+			margin: 0 auto;
+		}
+		& > .selected {
+			color: rgb(124, 165, 255);
+		}
 	}
 	.wrapper {
+		position: relative;
+
 		align-self: center;
 		justify-self: center;
 
@@ -208,7 +228,7 @@
 		height: 100%;
 		display: grid;
 
-		grid-template-rows: minmax(0, 1fr) minmax(0, 5fr);
+		grid-template-rows: auto minmax(0, 1fr);
 
 		font-family: Arial, Helvetica, sans-serif;
 	}
