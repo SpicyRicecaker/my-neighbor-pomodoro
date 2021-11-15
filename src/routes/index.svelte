@@ -81,7 +81,7 @@
 			}
 			case State.ShortBreaking:
 			case State.LongBreaking: {
-				setState(State.ShortBreaking, false);
+				setState(State.Working, false);
 				notification = 'time to work!';
 				break;
 			}
@@ -178,7 +178,7 @@
 				{:else}
 					<Play on:click={toggleRunning} />
 				{/if}
-				<div on:click={() => nextState(false)}><Ff /></div>
+				<div on:click={() => nextState(true)}><Ff /></div>
 			</div>
 		</div>
 	</div>
@@ -213,6 +213,7 @@
 			right: 1rem;
 			color: $black;
 			opacity: 50%;
+			user-select: none;
 		}
 
 		& > .option {
@@ -242,6 +243,7 @@
 	.time {
 		width: 100%;
 		height: 100%;
+		user-select: none;
 		& > svg {
 			display: block;
 			width: 100%;
@@ -283,5 +285,8 @@
 	}
 	.notification {
 		top: 1.5rem;
+		&:hover {
+			cursor: pointer;
+		}
 	}
 </style>
