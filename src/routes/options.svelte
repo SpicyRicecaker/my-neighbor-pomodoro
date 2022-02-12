@@ -69,8 +69,20 @@
 			<div class="field">
 				<label for={field.label}>{field.visibleLabel}</label>
 				<div class="input-unit">
-					<input placeholder="(time in minutes)" bind:value={field.fillerContent} class="overlay" />
-					<input placeholder="(time in minutes)" class:invalid={field.valid} bind:value={field.content} id="work" type="text" />
+					<input
+						tabindex="-1"
+						placeholder="(time in minutes)"
+						bind:value={field.fillerContent}
+						class="overlay"
+					/>
+					<input
+						autocomplete="off"
+						placeholder="(time in minutes)"
+						class:invalid={field.valid}
+						bind:value={field.content}
+						id="work"
+						type="text"
+					/>
 				</div>
 			</div>
 		{/each}
