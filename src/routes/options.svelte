@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { config } from '$lib/store';
 
-	// $: workLabel = getLabel($config.work);
-	// $: shortBreakLabel = getLabel($config.shortBreak);
-	// $: longBreakLabel = getLabel($config.longBreak);
-
-	// type ConfigKey = keyof typeof $config;
-
 	interface Field {
 		label: string;
 		visibleLabel: string;

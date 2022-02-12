@@ -28,5 +28,9 @@
 <style>
 	svg {
 		height: 3rem;
+		cursor: pointer;
+	}
+	rect {
+		transition: 1s;
 	}
 </style>

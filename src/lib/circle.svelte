@@ -26,5 +26,9 @@
 <style>
 	svg {
 		height: 3rem;
+		cursor: pointer;
+	}
+	circle {
+		transition: 1s;
 	}
 </style>

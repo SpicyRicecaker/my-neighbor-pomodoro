@@ -22,7 +22,17 @@
 	}
 	let state: State = State.Working;
 	// Array of symbols that represent each state
-	const stateSvgArray = [Triangle, Square, Circle];
+	const stateSvgArray = [
+		{
+			shape: Triangle,
+			color: 'E60026'
+		},
+		{
+			shape: Square,
+			color: 'FFF880'
+		},
+		{ shape: Circle, color: '0070FF' }
+	];
 
 	// Time left in our current state
 	let timeLeft: number = $config.work * 60 * 1000;
@@ -154,8 +164,8 @@
 			<div>
 				{#each stateSvgArray as s, i}
 					<svelte:component
-						this={s}
-						color={state === i ? '400000' : '000000'}
+						this={s.shape}
+						color={state === i ? s.color : '000000'}
 						on:click={() => setState(i, true)}
 					/>
 				{/each}

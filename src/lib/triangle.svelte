@@ -25,5 +25,9 @@
 <style>
 	svg {
 		height: 3rem;
+		cursor: pointer;
+	}
+	path {
+		transition: 1s;
 	}
 </style>
