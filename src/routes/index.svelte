@@ -28,7 +28,7 @@
 	let timeLeft: number = $config.work * 60 * 1000;
 
 	// Automatic time
-	$: minLeft = Math.floor((timeLeft / (60 * 1000)) % 60);
+	$: minLeft = Math.floor(timeLeft / (60 * 1000));
 	$: secLeft = Math.floor((timeLeft / 1000) % 60);
 
 	// Whether notifications have been accepeted by our user or not
@@ -65,10 +65,10 @@
 	};
 
 	const ensureNextState = () => {
-		if (confirm("Are you sure you want to skip the rest of the Pomodoro?")) {
+		if (confirm('Are you sure you want to skip the rest of the Pomodoro?')) {
 			nextState(false);
-		} 	
-	}
+		}
+	};
 
 	const nextState = (playNotification: boolean) => {
 		let notification = '';
@@ -149,7 +149,7 @@
 
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
-	<div class="wrapper">
+	<div class="wrapper" style="width: {minLeft >= 100 ? '16rem' : '13rem'}">
 		<div class="option">
 			<div>
 				{#each stateSvgArray as s, i}
@@ -208,8 +208,6 @@
 		// box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]
 		box-shadow: 1rem 1.5rem 3rem #00000025;
 
-		width: 13rem;
-		max-width: 13rem;
 		height: 9rem;
 		max-height: 9rem;
 

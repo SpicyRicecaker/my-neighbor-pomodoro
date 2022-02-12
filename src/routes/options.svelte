@@ -1,21 +1,85 @@
 <script lang="ts">
 	import { config } from '$lib/store';
+
+	// $: workLabel = getLabel($config.work);
+	// $: shortBreakLabel = getLabel($config.shortBreak);
+	// $: longBreakLabel = getLabel($config.longBreak);
+
+	// type ConfigKey = keyof typeof $config;
+
+	interface Field {
+		label: string;
+		visibleLabel: string;
+		content: string;
+		fillerContent: string;
+		valid: boolean;
+	}
+
+	let inputs: Field[] = [
+		{
+			label: 'work',
+			visibleLabel: 'work time',
+			content: $config.work.toString(),
+			fillerContent: '',
+			valid: true
+		},
+		{
+			label: 'shortBreak',
+			visibleLabel: 'short break time',
+			content: $config.shortBreak.toString(),
+			fillerContent: '',
+			valid: true
+		},
+		{
+			label: 'longBreak',
+			visibleLabel: 'long break time',
+			content: $config.longBreak.toString(),
+			fillerContent: '',
+			valid: true
+		}
+	];
+
+	$: {
+		for (let i = 0; i < inputs.length; i++) {
+			if (isValid(inputs[i].content)) {
+				inputs[i].valid = true;
+				let time = parseInt(inputs[i].content);
+				// console.log($config[inputs[i].label], time, inputs[i], inputs, inputs[i].label);
+				$config[inputs[i].label] = time;
+				inputs[i].fillerContent = `${time} ${time == 1 ? 'minute' : 'minutes'}`;
+			} else {
+				inputs[i].valid = false;
+				let string: string = '';
+				if (inputs[i].content.length == 0) {
+					string = '';
+				} else {
+					string = `${inputs[i].content} is not a number!`;
+				}
+				inputs[i].fillerContent = string;
+			}
+		}
+	}
+
+	function isValid(time: string): boolean {
+		if (time.length == 0 || time.toString().match(/\D/)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 </script>
 
 <div class="main">
 	<div class="wrapper">
-		<div>
-			<label for="work">work time</label>
-			<input bind:value={$config.work} id="work" type="text" />
-		</div>
-		<div>
-			<label for="short-break">short break</label>
-			<input bind:value={$config.shortBreak} id="short-break" type="text" />
-		</div>
-		<div>
-			<label for="long-break">long break</label>
-			<input bind:value={$config.longBreak} id="long-break" type="text" />
-		</div>
+		{#each inputs as field}
+			<div class="field">
+				<label for={field.label}>{field.visibleLabel}</label>
+				<div class="input-unit">
+					<input placeholder="(time in minutes)" bind:value={field.fillerContent} class="overlay" />
+					<input placeholder="(time in minutes)" class:invalid={field.valid} bind:value={field.content} id="work" type="text" />
+				</div>
+			</div>
+		{/each}
 	</div>
 </div>
 
@@ -35,19 +99,39 @@
 			justify-self: center;
 			display: grid;
 			gap: 2rem;
-			& > div {
+			// grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: repeat(3, minmax(0, 1fr));
+			& > .field {
 				color: $black;
 				opacity: 80%;
 				display: grid;
-				& > input {
-					border-top: 0;
-					border-left: 0;
-					border-right: 0;
-					outline: none;
-					font-size: 2rem;
-					transition: 0.4s;
-					&:focus {
-						border-color: rgba(178, 53, 53, 0.656);
+				grid-template-rows: repeat(3, minmax(0, 1fr));
+
+				& > .input-unit {
+					display: grid;
+					& > input {
+						grid-row: 1;
+						grid-column: 1;
+
+						border-top: 0;
+						border-left: 0;
+						border-right: 0;
+						outline: none;
+						font-size: 2rem;
+						transition: 0.4s;
+						&:focus {
+							border-color: rgba(178, 53, 53, 0.656);
+						}
+						&.invalid {
+							&:focus {
+								border-color: rgba(136, 176, 111, 0.656);
+							}
+						}
+					}
+					& > .overlay {
+						opacity: 50%;
+						pointer-events: none;
+						z-index: 1;
 					}
 				}
 			}
