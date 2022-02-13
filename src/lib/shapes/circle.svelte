@@ -1,5 +1,5 @@
-<script>
-	export let color = '000000';
+<script lang="ts">
+	export let active: boolean;
 </script>
 
 <svg
@@ -14,7 +14,8 @@
 	<defs id="defs151" />
 	<g id="layer1" transform="translate(-27.426906,-96.91331)">
 		<circle
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#{color};stroke-width:1.96158;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+			class:active
+			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:1.96158;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
 			id="path13523"
 			cx="36.248932"
 			cy="105.73534"
@@ -30,5 +31,9 @@
 	}
 	circle {
 		transition: 1s;
+		stroke: var(--foreground-color);
+	}
+	.active {
+		stroke: var(--blu);
 	}
 </style>

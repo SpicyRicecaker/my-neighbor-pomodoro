@@ -10,9 +10,12 @@
 	</g>
 </svg>
 
-<style>
+<style lang="scss">
 	svg {
 		height: 1rem;
 		width: 1rem;
+		& rect {
+			fill: var(--foreground-color);
+		}
 	}
 </style>

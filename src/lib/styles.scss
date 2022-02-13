@@ -1,7 +1,13 @@
-$black: #292828;
+:root {
+	--background-color: white;
+	--foreground-color: black;
+	--red: red;
+	--blu: blue;
+	--yel: yellow;
+}
 
 .link {
-	color: $black;
+	color: var(--foreground-color);
 	opacity: 80%;
 	font-family: Arial, Helvetica, sans-serif;
 	position: absolute;
@@ -11,7 +17,7 @@ $black: #292828;
 	text-decoration: none;
 	&:visited {
 		text-decoration: none;
-		color: $black;
+		color: var(--foreground-color);
 	}
     user-select: none;
 }

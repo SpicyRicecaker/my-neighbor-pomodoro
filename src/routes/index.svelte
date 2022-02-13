@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import audioSrc from '$lib/bell.webm';
-	import Ff from '$lib/ff.svelte';
-	import Play from '$lib/play.svelte';
-	import Pause from '$lib/pause.svelte';
+	import Ff from '$lib/actions/ff.svelte';
+	import Play from '$lib/actions/play.svelte';
+	import Pause from '$lib/actions/pause.svelte';
 	// TODO currently very inefficient loading of svgs
-	import Square from '$lib/square.svelte';
-	import Triangle from '$lib/triangle.svelte';
-	import Circle from '$lib/circle.svelte';
+	import Square from '$lib/shapes/square.svelte';
+	import Triangle from '$lib/shapes/triangle.svelte';
+	import Circle from '$lib/shapes/circle.svelte';
 
 	import { config } from '$lib/store';
+	import ThemePicker from '$lib/theme-picker.svelte';
+	import { theme } from '$lib/theme';
 
 	let running = false;
 	let numWork = 0;
@@ -24,14 +26,12 @@
 	// Array of symbols that represent each state
 	const stateSvgArray = [
 		{
-			shape: Triangle,
-			color: 'E60026'
+			shape: Triangle
 		},
 		{
-			shape: Square,
-			color: 'FFF880'
+			shape: Square
 		},
-		{ shape: Circle, color: '0070FF' }
+		{ shape: Circle }
 	];
 
 	// Time left in our current state
@@ -159,13 +159,17 @@
 
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
-	<div class="wrapper" style="width: {minLeft >= 100 ? '16rem' : '13rem'}">
+	<div
+		class="wrapper"
+		id={$theme.variant === 'dark' ? 'dark' : ''}
+		style="width: {minLeft >= 100 ? '16rem' : '13rem'}"
+	>
 		<div class="option">
 			<div>
 				{#each stateSvgArray as s, i}
 					<svelte:component
 						this={s.shape}
-						color={state === i ? s.color : '000000'}
+						active={state === i}
 						on:click={() => setState(i, true)}
 					/>
 				{/each}
@@ -174,14 +178,12 @@
 		<div class="count"><div>{numWork + 1}</div></div>
 		<div class="time">
 			<svg
-				width="100%"
-				height="100%"
 				viewBox="0 0 100 100"
 				preserveAspectRatio="xMinYMid meet"
-				style="background-color:white"
 				xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 			>
+				<rect />
 				<text x="0" y="70" font-size="57"
 					>{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}</text
 				>
@@ -203,10 +205,14 @@
 	<div class="link notification" on:click={requestNotification}>notify me</div>
 {/if}
 <a class="link" href="/options">options</a>
+<ThemePicker />
 
 <style lang="scss">
 	@import '../lib/styles.scss';
 
+	#dark {
+		box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.05);
+	}
 	.wrapper {
 		position: relative;
 		align-self: center;
@@ -216,7 +222,7 @@
 
 		border-radius: 1rem;
 		// box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]
-		box-shadow: 1rem 1.5rem 3rem #00000025;
+		box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.2);
 
 		height: 9rem;
 		max-height: 9rem;
@@ -225,7 +231,7 @@
 			position: absolute;
 			top: 1rem;
 			right: 1rem;
-			color: $black;
+			color: var(--foreground-color);
 			opacity: 50%;
 			user-select: none;
 		}
@@ -262,8 +268,14 @@
 			display: block;
 			width: 100%;
 			height: 100%;
+			& > rect {
+				width: 200%;
+				height: 200%;
+				fill: var(--background-color);
+				transition: 1s;
+			}
 			& > text {
-				fill: $black;
+				fill: var(--foreground-color);
 				opacity: 70%;
 			}
 		}

@@ -1,5 +1,5 @@
-<script>
-	export let color = '000000';
+<script lang="ts">
+	export let active: boolean;
 </script>
 
 <svg
@@ -14,7 +14,8 @@
 	<defs id="defs151" />
 	<g id="layer1" transform="translate(-27.488621,-96.634823)">
 		<rect
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#{color};stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+            class:active 
+			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
 			id="rect17133"
 			width="15.516"
 			height="15.516255"
@@ -32,5 +33,9 @@
 	}
 	rect {
 		transition: 1s;
+		stroke: var(--foreground-color);
+	}
+	.active {
+		stroke: var(--red);
 	}
 </style>

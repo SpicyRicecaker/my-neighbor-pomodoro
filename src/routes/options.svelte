@@ -78,7 +78,7 @@
 					<input
 						autocomplete="off"
 						placeholder="(time in minutes)"
-						class:invalid={field.valid}
+						class:valid={field.valid}
 						bind:value={field.content}
 						id="work"
 						type="text"
@@ -108,7 +108,7 @@
 			// grid-template-columns: minmax(0, 1fr);
 			grid-template-rows: repeat(3, minmax(0, 1fr));
 			& > .field {
-				color: $black;
+				color: var(--foreground-color);
 				opacity: 80%;
 				display: grid;
 				grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -125,12 +125,14 @@
 						outline: none;
 						font-size: 2rem;
 						transition: 0.4s;
+						background-color: var(--background-color);
+						color: var(--foreground-color);
 						&:focus {
-							border-color: rgba(178, 53, 53, 0.656);
+							border-color: var(--red);
 						}
-						&.invalid {
+						&.valid {
 							&:focus {
-								border-color: rgba(136, 176, 111, 0.656);
+								border-color: var(--grn);
 							}
 						}
 					}

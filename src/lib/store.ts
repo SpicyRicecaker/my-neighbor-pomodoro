@@ -27,3 +27,23 @@ const createConfig = (): Writable<Config> => {
 }
 
 export const config = createConfig();
+
+const createTheme = (): Writable<boolean> => {
+    const data = browser ? window.localStorage.getItem('themeVisible') : null;
+    const config: boolean = data ? JSON.parse(data) : true;
+
+    const { subscribe, set } = writable(config);
+
+    return {
+        subscribe,
+        set: (n: boolean) => {
+            browser ? window.localStorage.setItem('themeVisible', JSON.stringify(n)) : {};
+            set(n)
+        },
+        // Does nothing, just satisfying the `Writable` type req lol
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        update: function (this: void) { }
+    };
+}
+
+export const themeVisible = createTheme();

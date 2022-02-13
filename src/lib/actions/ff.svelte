@@ -10,14 +10,17 @@
 	<g id="layer1" transform="translate(-35.025239,-93.774878)">
 		<path
 			id="path17659-3"
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
+			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
 			d="m 36.101239,95.638486 v 3.280937 l 2.84117,-1.640726 z m 3.538802,0 v 3.280937 l 2.84117,-1.640726 z"
 		/>
 	</g>
 </svg>
 
-<style>
+<style lang="scss">
 	svg {
 		height: 1rem;
+		& path {
+			stroke: var(--foreground-color);
+		}
 	}
 </style>
