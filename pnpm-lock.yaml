@@ -3,8 +3,10 @@ lockfileVersion: 5.3
 specifiers:
   '@sveltejs/adapter-vercel': next
   '@sveltejs/kit': next
+  '@types/cookie': ^0.4.1
   '@typescript-eslint/eslint-plugin': ^4.33.0
   '@typescript-eslint/parser': ^4.33.0
+  cookie: ^0.4.2
   eslint: ^7.32.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-svelte3: ^3.4.0
@@ -17,9 +19,13 @@ specifiers:
   tslib: ^2.3.1
   typescript: ^4.5.5
 
+dependencies:
+  '@types/cookie': 0.4.1
+  cookie: 0.4.2
+
 devDependencies:
   '@sveltejs/adapter-vercel': 1.0.0-next.43
-  '@sveltejs/kit': 1.0.0-next.266_sass@1.49.7+svelte@3.46.4
+  '@sveltejs/kit': 1.0.0-next.267_sass@1.49.7+svelte@3.46.4
   '@typescript-eslint/eslint-plugin': 4.33.0_959502c0ea240e86d4d2ba8b8c0fee45
   '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.5
   eslint: 7.32.0
@@ -123,8 +129,8 @@ packages:
       esbuild: 0.14.21
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.266_sass@1.49.7+svelte@3.46.4:
-    resolution: {integrity: sha512-nlc+ECltLIadY12K+DerDLtgKRBe/ri+R5e2iWFIovetk31heU92nd1k24DL+FMcNo7B0Ik4XxurHCV2eoft3g==}
+  /@sveltejs/kit/1.0.0-next.267_sass@1.49.7+svelte@3.46.4:
+    resolution: {integrity: sha512-zwtSuhgQV4qCXggmSU6hduFLuEE/7HMBNgRDHNjFPlXTn6VZT6whKPIfLGVRpHVveOyYzCxH6Dcy7nl0wfZ9kw==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -163,6 +169,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@types/cookie/0.4.1:
+    resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
+    dev: false
 
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
@@ -456,6 +466,11 @@ packages:
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
+
+  /cookie/0.4.2:
+    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}

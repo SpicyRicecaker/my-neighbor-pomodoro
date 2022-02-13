@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import audioSrc from '$lib/bell.webm';
 	import Ff from '$lib/actions/ff.svelte';
 	import Play from '$lib/actions/play.svelte';
@@ -10,8 +10,10 @@
 	import Circle from '$lib/shapes/circle.svelte';
 
 	import { config } from '$lib/store';
-	import ThemePicker from '$lib/theme-picker.svelte';
-	import { theme } from '$lib/theme';
+
+	import type { Theme } from '$lib/theme';
+	import type { Writable } from 'svelte/store';
+	const t = getContext('t') as Writable<Theme>;
 
 	let running = false;
 	let numWork = 0;
@@ -161,7 +163,7 @@
 <div class="main">
 	<div
 		class="wrapper"
-		id={$theme.variant === 'dark' ? 'dark' : ''}
+		id={$t.variant === 'dark' ? 'dark' : ''}
 		style="width: {minLeft >= 100 ? '16rem' : '13rem'}"
 	>
 		<div class="option">
@@ -205,7 +207,6 @@
 	<div class="link notification" on:click={requestNotification}>notify me</div>
 {/if}
 <a class="link" href="/options">options</a>
-<ThemePicker />
 
 <style lang="scss">
 	@import '../lib/styles.scss';
