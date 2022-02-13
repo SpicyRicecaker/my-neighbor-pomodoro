@@ -124,7 +124,7 @@
 						border-right: 0;
 						outline: none;
 						font-size: 2rem;
-						transition: 0.4s;
+						transition: 1s;
 						background-color: var(--background-color);
 						color: var(--foreground-color);
 						&:focus {

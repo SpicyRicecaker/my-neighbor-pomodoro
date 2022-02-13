@@ -129,5 +129,20 @@ export const themes: Theme[] = [
         backgroundColor: '#111921',
         backdrop: '195, 186, 198',
         variant: 'dark'
-    }
+    },
+    {
+        name: 'Laser',
+        blk: '#26214D',
+        red: '#D42450',
+        grn: '#A9d400',
+        yel: '#D95702',
+        blu: '#301D78',
+        mag: '#E9C8D3',
+        cya: '#00A7B5',
+        wht: '#C6E4E4',
+        foregroundColor: '#C6E4E4',
+        backgroundColor: '#26214D',
+        backdrop: '198, 228, 228',
+        variant: 'dark'
+    },
 ];

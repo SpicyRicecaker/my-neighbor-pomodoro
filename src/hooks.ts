@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Handle, GetSession } from "@sveltejs/kit";
-import type { CookieSerializeOptions } from 'cookie';
-import { serialize, parse } from 'cookie';
-
-const options: CookieSerializeOptions = {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: true,
-};
+import { parse } from 'cookie';
 
 export const handle: Handle = async function ({ event, resolve }) {
     // Parse the cookie w/ user & token
@@ -21,16 +13,6 @@ export const handle: Handle = async function ({ event, resolve }) {
 
     // Then append token cookie
     const response = await resolve(event);
-
-    // response.headers.set('theme') = cookies['theme'];
-
-    // Call endpoint
-
-    // After endpoint, append cookies to res
-    // Could use bearer authorization but then we would have to set the token to local storage
-    // and pass that along with each and every request. It's too much work compared to set and forget lol
-    // response.headers.set(token', request.locals.token, options)}`;
-    // response.headers.set('set-cookie', serialize('theme', (event.locals as any).theme, options));
 
     return response;
 }

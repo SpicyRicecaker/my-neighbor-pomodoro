@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-	// import { session } from '$app/stores';
+	import { session } from '$app/stores';
 
-	// import type { Theme } from './theme';
 	import { selected_theme, themes } from './theme';
-
-	// export let themes: Theme[];
-	// export let ltheme: string;
 
 	function updateCookie(new_theme: string) {
 		if (browser && new_theme) {
@@ -15,7 +11,7 @@
 			document.cookie = `theme=${new_theme};SameSite=None;Secure;Path=/;Expires=${daysToExpire}`;
 			console.log('setting cookie');
 			// trigger new load functions to actually interpret this cookie change
-			// $session.user = {};
+			$session.user = {};
 		}
 	}
 	$: updateCookie($selected_theme);
