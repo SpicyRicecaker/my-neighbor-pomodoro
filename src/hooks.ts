@@ -48,7 +48,7 @@ export const getSession: GetSession = async (event) => {
                 // only include properties needed client-side —
                 // exclude anything else attached to the user
                 // like access tokens etc
-                theme: "Capuccin",
+                theme: "Chrome",
             }
         };
 }
