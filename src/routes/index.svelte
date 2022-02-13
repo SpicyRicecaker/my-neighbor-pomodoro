@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import audioSrc from '$lib/bell.webm';
 	import Ff from '$lib/actions/ff.svelte';
 	import Play from '$lib/actions/play.svelte';
@@ -11,9 +11,7 @@
 
 	import { config } from '$lib/store';
 
-	import type { Theme } from '$lib/theme';
-	import type { Writable } from 'svelte/store';
-	const t = getContext('t') as Writable<Theme>;
+	import { theme as t } from '$lib/theme';
 
 	let running = false;
 	let numWork = 0;
