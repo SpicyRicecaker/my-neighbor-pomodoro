@@ -189,7 +189,7 @@
 				>
 			</svg>
 		</div>
-		<div class="state">
+		<!-- <div class="state">
 			<div class="button">
 				{#if running}
 					<Pause on:click={toggleRunning} />
@@ -198,13 +198,36 @@
 				{/if}
 				<div on:click={ensureNextState}><Ff /></div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 {#if notification !== 'denied' && notification !== 'granted'}
-	<div class="link notification" on:click={requestNotification}>notify me</div>
+	<div class="link notification" on:click={requestNotification}>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="h-6 w-6"
+			fill="none"
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			stroke="currentColor"
+			stroke-width="2"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+			/>
+		</svg>
+	</div>
 {/if}
-<a class="link" href="/options">options</a>
+<a class="link" style="font-size: 1rem;" href="/options">
+	<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+		<path
+			d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"
+		/>
+	</svg>
+</a>
 
 <style lang="scss">
 	@import '../lib/styles.scss';
