@@ -4,34 +4,30 @@
 
 <svg
 	on:click
-	width="100%"
-	height="100%"
-	viewBox="0 0 17.668 17.668255"
-	version="1.1"
-	id="svg154"
+	class:active
 	xmlns="http://www.w3.org/2000/svg"
+	width="20"
+	height="20"
+	viewBox="0 0 24 24"
+	stroke-width="2"
+	fill="none"
+	stroke-linecap="round"
+	stroke-linejoin="round"
 >
-	<defs id="defs151" />
-	<g id="layer1" transform="translate(-27.488621,-96.634823)">
-		<rect
-            class:active 
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
-			id="rect17133"
-			width="15.516"
-			height="15.516255"
-			x="28.564621"
-			y="97.710823"
-			rx="0"
-		/>
-	</g>
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path
+		d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"
+	/>
+	<path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+	<path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+	<path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5z" />
+	<path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />
 </svg>
 
 <style>
 	svg {
 		height: 3rem;
 		cursor: pointer;
-	}
-	rect {
 		transition: 1s;
 		stroke: var(--foreground-color);
 	}

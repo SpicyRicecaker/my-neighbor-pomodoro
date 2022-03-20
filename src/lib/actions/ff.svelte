@@ -1,26 +1,17 @@
-<svg on:click
-	width="9.6078558mm"
-	height="7.0084448mm"
-	viewBox="0 0 9.607856 7.008445"
-	version="1.1"
-	id="svg154"
+<svg
+	on:click
 	xmlns="http://www.w3.org/2000/svg"
+	class="h-6 w-6"
+	fill="none"
+	width="20"
+	height="20"
+	viewBox="0 0 24 24"
+	stroke-width="2"
+	stroke="var(--foreground-color)"
 >
-	<defs id="defs151" />
-	<g id="layer1" transform="translate(-35.025239,-93.774878)">
-		<path
-			id="path17659-3"
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:2.152;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
-			d="m 36.101239,95.638486 v 3.280937 l 2.84117,-1.640726 z m 3.538802,0 v 3.280937 l 2.84117,-1.640726 z"
-		/>
-	</g>
+	<path
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"
+	/>
 </svg>
-
-<style lang="scss">
-	svg {
-		height: 1rem;
-		& path {
-			stroke: var(--foreground-color);
-		}
-	}
-</style>

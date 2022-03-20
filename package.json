@@ -20,7 +20,6 @@
     "eslint-plugin-svelte3": "^3.4.1",
     "prettier": "^2.6.0",
     "prettier-plugin-svelte": "^2.6.0",
-    "rollup-plugin-svelte": "^7.1.0",
     "sass": "^1.49.9",
     "svelte": "^3.46.4",
     "svelte-check": "^2.4.6",
@@ -31,6 +30,7 @@
   "type": "module",
   "dependencies": {
     "@types/cookie": "^0.4.1",
-    "cookie": "^0.4.2"
+    "cookie": "^0.4.2",
+    "pixi.js": "^6.2.2"
   }
 }

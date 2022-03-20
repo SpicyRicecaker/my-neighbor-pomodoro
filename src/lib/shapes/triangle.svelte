@@ -4,31 +4,26 @@
 
 <svg
 	on:click
-	width="100%"
-	height="100%"
-	viewBox="0 0 21.883971 18.956333"
-	version="1.1"
-	id="svg154"
+	class:active
 	xmlns="http://www.w3.org/2000/svg"
+	class="h-6 w-6"
+	fill="none"
+	width="20"
+	height="20"
+	viewBox="0 0 24 24"
+	stroke-width="2"
 >
-	<defs id="defs151" />
-	<g id="layer1" transform="translate(-25.648652,-95.602973)">
-		<path
-            class:active 
-			style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:18.8976;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.612813"
-			id="path16239"
-			transform="matrix(0.00571134,-0.12383225,0.12383225,0.00571134,29.767004,64.122625)"
-			d="M -270.02191,67.505482 -391.08421,145.11575 -397.76552,1.4675861 Z"
-		/>
-	</g>
+	<path
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+	/>
 </svg>
 
 <style>
 	svg {
 		height: 3rem;
 		cursor: pointer;
-	}
-	path {
 		transition: 1s;
 		stroke: var(--foreground-color);
 	}

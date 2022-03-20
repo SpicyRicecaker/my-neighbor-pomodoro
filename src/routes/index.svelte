@@ -155,8 +155,15 @@
 	// Request notification
 	const requestNotification = () =>
 		Notification.requestPermission().then((permission) => (notification = permission));
+
+	const handleKey = (e: KeyboardEvent) => {
+		if (e.code === 'Space') {
+			toggleRunning();
+		}
+	}
 </script>
 
+<svelte:window on:keydown={(e) => {handleKey(e)}} />
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
 	<div
@@ -189,7 +196,7 @@
 				>
 			</svg>
 		</div>
-		<!-- <div class="state">
+		<div class="state">
 			<div class="button">
 				{#if running}
 					<Pause on:click={toggleRunning} />
@@ -198,7 +205,7 @@
 				{/if}
 				<div on:click={ensureNextState}><Ff /></div>
 			</div>
-		</div> -->
+		</div>
 	</div>
 </div>
 {#if notification !== 'denied' && notification !== 'granted'}
@@ -222,7 +229,14 @@
 	</div>
 {/if}
 <a class="link" style="font-size: 1rem;" href="/options">
-	<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+	<svg
+		width="20"
+		height="20"
+		xmlns="http://www.w3.org/2000/svg"
+		class="h-5 w-5"
+		viewBox="0 0 20 20"
+		fill="currentColor"
+	>
 		<path
 			d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"
 		/>
@@ -232,9 +246,9 @@
 <style lang="scss">
 	@import '../lib/styles.scss';
 
-	#dark {
-		box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.05);
-	}
+	// #dark {
+	// 	box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.05);
+	// }
 	.wrapper {
 		position: relative;
 		align-self: center;
@@ -244,15 +258,15 @@
 
 		border-radius: 1rem;
 		// box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]
-		box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.2);
+		// box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.2);
 
 		height: 9rem;
 		max-height: 9rem;
 
 		& > .count {
 			position: absolute;
-			top: 1rem;
-			right: 1rem;
+			top: 201%;
+			right: 60%;
 			color: var(--foreground-color);
 			opacity: 50%;
 			user-select: none;
@@ -260,10 +274,10 @@
 
 		& > .option {
 			position: absolute;
-			top: -45%;
-			left: 0;
+			top: -100%;
+			left: 15%;
 
-			width: 100%;
+			width: 80%;
 
 			align-items: center;
 			justify-items: center;
@@ -298,7 +312,6 @@
 			}
 			& > text {
 				fill: var(--foreground-color);
-				opacity: 70%;
 			}
 		}
 	}
@@ -311,7 +324,7 @@
 		// Center the label by self, not each individual container
 		position: absolute;
 
-		top: 130%;
+		top: 200%;
 		left: 0;
 		width: 100%;
 

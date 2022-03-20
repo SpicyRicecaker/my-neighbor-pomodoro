@@ -5,7 +5,7 @@ import { derived, writable } from "svelte/store";
 
 // export const activated = writable(false);
 
-export const selected_theme = writable('Catpuccin');
+export const selected_theme = writable('Gruvbox Material Dark');
 
 export const theme = derived(
     selected_theme,
@@ -83,66 +83,6 @@ export const themes: Theme[] = [
         foregroundColor: '#d4be98',
         backgroundColor: '#292828',
         backdrop: '212, 190, 152',
-        variant: 'dark'
-    },
-    {
-        name: 'Solarized Light',
-        blk: '#657b83',
-        red: '#dc322f',
-        grn: '#859900',
-        yel: '#b58900',
-        blu: '#268bd2',
-        mag: '#d33682',
-        cya: '#2aa198',
-        wht: '#fdf6e3',
-        foregroundColor: '#657b83',
-        backgroundColor: '#fdf6e3',
-        backdrop: '101, 123, 131',
-        variant: 'light'
-    },
-    {
-        name: 'Solarized Dark',
-        blk: '#839496',
-        red: '#ea6962',
-        grn: '#a9b665',
-        yel: '#d8a657',
-        blu: '#7daea3',
-        mag: '#d3869b',
-        cya: '#89b482',
-        wht: '#002b36',
-        foregroundColor: '#002b36',
-        backgroundColor: '#839496',
-        backdrop: '0, 43, 54',
-        variant: 'dark'
-    },
-    {
-        name: 'Catpuccin',
-        blk: '#111921',
-        red: '#F28FAD',
-        grn: '#ABE9B3',
-        yel: '#FAE3B0',
-        blu: '#96CDFB',
-        mag: '#DDB6F2',
-        cya: '#89DCEB',
-        wht: '#C3BAC6',
-        foregroundColor: '#C3BAC6',
-        backgroundColor: '#111921',
-        backdrop: '195, 186, 198',
-        variant: 'dark'
-    },
-    {
-        name: 'Laser',
-        blk: '#26214D',
-        red: '#D42450',
-        grn: '#A9d400',
-        yel: '#D95702',
-        blu: '#301D78',
-        mag: '#E9C8D3',
-        cya: '#00A7B5',
-        wht: '#C6E4E4',
-        foregroundColor: '#C6E4E4',
-        backgroundColor: '#26214D',
-        backdrop: '198, 228, 228',
         variant: 'dark'
     },
 ];
