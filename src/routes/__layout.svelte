@@ -17,6 +17,15 @@
 	export let theme: string;
 
 	$selected_theme = theme;
+
+	// import * as pixi from 'pixi.js';
+	// import { onMount } from 'svelte';
+
+	// onMount(() => {
+	// 	let app = new pixi.Application({ width: 640, height: 360 });
+
+	// 	document.body.appendChild(app.view);
+	// });
 </script>
 
 <div

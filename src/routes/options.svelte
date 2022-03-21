@@ -71,13 +71,14 @@
 				<div class="input-unit">
 					<input
 						tabindex="-1"
-						placeholder="(time in minutes)"
-						bind:value={field.fillerContent}
 						class="overlay"
+						class:valid={field.valid}
+						bind:value={field.fillerContent}
 					/>
 					<input
 						autocomplete="off"
 						placeholder="(time in minutes)"
+						class="actual"
 						class:valid={field.valid}
 						bind:value={field.content}
 						id="work"
@@ -132,7 +133,7 @@
 
 				& > .input-unit {
 					display: grid;
-					& > input {
+					& input {
 						grid-row: 1;
 						grid-column: 1;
 
@@ -144,17 +145,23 @@
 						transition: 1s;
 						background-color: var(--background-color);
 						color: var(--foreground-color);
-						&:focus {
+
+						&.actual {
 							border-color: var(--red);
-						}
-						&.valid {
-							&:focus {
-								border-color: var(--grn);
+
+							&.valid {
+								border-color: var(--background-color);
+								&:focus {
+									border-color: var(--grn);
+								}
 							}
 						}
 					}
 					& > .overlay {
-						opacity: 50%;
+						background: none;
+						border: none;
+
+						opacity: 80%;
 						pointer-events: none;
 						z-index: 1;
 					}
