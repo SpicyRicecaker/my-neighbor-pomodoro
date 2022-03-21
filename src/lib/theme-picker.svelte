@@ -27,6 +27,7 @@
 
 <style lang="scss">
 	#theme {
+		-webkit-appearance:none;
 		background-color: var(--background-color);
 		color: var(--foreground-color);
 		outline: none;
