@@ -160,10 +160,14 @@
 		if (e.code === 'Space') {
 			toggleRunning();
 		}
-	}
+	};
 </script>
 
-<svelte:window on:keydown={(e) => {handleKey(e)}} />
+<svelte:window
+	on:keydown={(e) => {
+		handleKey(e);
+	}}
+/>
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
 	<div
@@ -274,7 +278,7 @@
 
 		& > .option {
 			position: absolute;
-			top: -100%;
+			top: -90%;
 			left: 15%;
 
 			width: 80%;

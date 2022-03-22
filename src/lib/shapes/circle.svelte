@@ -28,7 +28,6 @@
 
 <style>
 	svg {
-		height: 3rem;
 		cursor: pointer;
 		transition: 1s;
 		stroke: var(--foreground-color);

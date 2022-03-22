@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ThemePicker from '$lib/theme-picker.svelte';
 	import { config } from '$lib/store';
 
 	interface Field {
@@ -12,21 +13,21 @@
 	let inputs: Field[] = [
 		{
 			label: 'work',
-			visibleLabel: 'work time',
+			visibleLabel: 'work',
 			content: $config.work.toString(),
 			fillerContent: '',
 			valid: true
 		},
 		{
 			label: 'shortBreak',
-			visibleLabel: 'short break time',
+			visibleLabel: 'short break',
 			content: $config.shortBreak.toString(),
 			fillerContent: '',
 			valid: true
 		},
 		{
 			label: 'longBreak',
-			visibleLabel: 'long break time',
+			visibleLabel: 'long break',
 			content: $config.longBreak.toString(),
 			fillerContent: '',
 			valid: true
@@ -40,7 +41,7 @@
 				let time = parseInt(inputs[i].content);
 				// console.log($config[inputs[i].label], time, inputs[i], inputs, inputs[i].label);
 				$config[inputs[i].label] = time;
-				inputs[i].fillerContent = `${time} ${time == 1 ? 'minute' : 'minutes'}`;
+				inputs[i].fillerContent = `${time} ${time == 1 ? 'min' : 'min'}`;
 			} else {
 				inputs[i].valid = false;
 				let string: string = '';
@@ -67,21 +68,24 @@
 	<div class="wrapper">
 		{#each inputs as field}
 			<div class="field">
-				<label for={field.label}>{field.visibleLabel}</label>
 				<div class="input-unit">
+					<label for={field.label}>{field.visibleLabel}</label>
 					<input
+						size="10"
 						tabindex="-1"
 						class="overlay"
 						class:valid={field.valid}
 						bind:value={field.fillerContent}
+						type="text"
 					/>
 					<input
+						size="10"
+						id={field.label}
 						autocomplete="off"
 						placeholder="(time in minutes)"
 						class="actual"
 						class:valid={field.valid}
 						bind:value={field.content}
-						id="work"
 						type="text"
 					/>
 				</div>
@@ -109,6 +113,8 @@
 	</svg></a
 >
 
+<ThemePicker />
+
 <style lang="scss">
 	@import '../lib/styles.scss';
 
@@ -128,12 +134,22 @@
 			& > .field {
 				color: var(--foreground-color);
 				opacity: 80%;
-				display: grid;
-				grid-template-rows: repeat(3, minmax(0, 1fr));
+				// display: grid;
+				// grid-template-rows: repeat(3, minmax(0, 1fr));
 
+				& label {
+					font-size: 1rem;
+					text-align: left;
+					opacity: 80%;
+
+					padding-left: 1px;
+					border-left: 1px transparent black;
+				}
 				& > .input-unit {
 					display: grid;
 					& input {
+						padding-bottom: 0;
+
 						grid-row: 1;
 						grid-column: 1;
 
@@ -142,7 +158,11 @@
 						border-right: 0;
 						outline: none;
 						font-size: 2rem;
-						transition: 1s;
+
+						min-width: none;
+
+						transition: border-color 1s;
+
 						background-color: var(--background-color);
 						color: var(--foreground-color);
 
@@ -159,7 +179,7 @@
 					}
 					& > .overlay {
 						background: none;
-						border: none;
+						border-color: #00000000;
 
 						opacity: 80%;
 						pointer-events: none;

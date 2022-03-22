@@ -11,7 +11,6 @@
 </script>
 
 <script lang="ts">
-	import ThemePicker from '$lib/theme-picker.svelte';
 	import { theme as t, selected_theme } from '$lib/theme';
 
 	export let theme: string;
@@ -32,7 +31,6 @@
 	style="--foreground-color:{$t.foregroundColor};--background-color:{$t.backgroundColor};--blk:{$t.blk};--red:{$t.red};--grn:{$t.grn};--yel:{$t.yel};--blu:{$t.blu};--mag:{$t.mag};--cya:{$t.cya};--wht:{$t.wht};--backdrop:{$t.backdrop}"
 >
 	<slot />
-	<ThemePicker />
 </div>
 
 <style lang="scss">

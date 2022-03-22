@@ -18,37 +18,53 @@
 </script>
 
 <div id="theme-circle">
-	<select name="theme" id="theme" bind:value={$selected_theme}>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		class="h-6 w-6"
+		fill="none"
+		width="20"
+		height="20"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+		stroke-width="2"
+	>
+		<path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+		/>
+	</svg>
+	<!-- <select name="theme" id="theme" bind:value={$selected_theme}>
 		{#each themes as theme}
-			<option value={theme.name} label={theme.name} />
+			<option value={theme.name} label={'◯'}/>
 		{/each}
-	</select>
+	</select> -->
 </div>
 
 <style lang="scss">
-	#theme {
-		-webkit-appearance:none;
-		background-color: var(--background-color);
-		color: var(--foreground-color);
-		outline: none;
-		position: absolute;
-		top: 1rem;
-		left: 1rem;
-		transition: 1s;
-		// display: none;
-	}
 	#theme-circle {
 		display: flex;
 		// text-align: center;
-		& > #theme {
+		& > svg {
 			// Style
 			border-radius: 0;
 			border: 0;
-			padding: 0.2rem;
+			// padding: 0.2rem;
 			appearance: none;
+			opacity: 80%;
 			// Animation
 			// Font
 			font-size: 1rem;
+
+			-webkit-appearance: none;
+			background-color: var(--background-color);
+			color: var(--foreground-color);
+			outline: none;
+			position: absolute;
+			top: 1rem;
+			left: 1rem;
+			transition: 1s;
+			// display: none;
 		}
 	}
 </style>
