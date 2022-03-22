@@ -161,7 +161,7 @@
 
 						min-width: none;
 
-						transition: border-color 1s;
+						transition: border-color 1s, background-color 1s;
 
 						background-color: var(--background-color);
 						color: var(--foreground-color);
