@@ -2,7 +2,7 @@
 	import { browser } from '$app/env';
 	import { session } from '$app/stores';
 
-	import { selected_theme, theme, themes } from './theme';
+	import { selected_theme, themes } from './theme';
 
 	function updateCookie(new_theme: string) {
 		if (browser && new_theme) {

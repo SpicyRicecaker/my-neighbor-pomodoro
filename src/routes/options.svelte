@@ -36,12 +36,12 @@
 
 	$: {
 		for (let i = 0; i < inputs.length; i++) {
-			if (isValid(inputs[i].content)) {
+			let time = parseFloat(inputs[i].content);
+			if (!isNaN(time) && isFinite(inputs[i].content as unknown as number)) {
 				inputs[i].valid = true;
-				let time = parseInt(inputs[i].content);
 				// console.log($config[inputs[i].label], time, inputs[i], inputs, inputs[i].label);
 				$config[inputs[i].label] = time;
-				inputs[i].fillerContent = `${time} ${time == 1 ? 'min' : 'min'}`;
+				inputs[i].fillerContent = `${inputs[i].content} ${time == 1 ? 'min' : 'min'}`;
 			} else {
 				inputs[i].valid = false;
 				let string: string = '';
@@ -55,13 +55,13 @@
 		}
 	}
 
-	function isValid(time: string): boolean {
-		if (time.length == 0 || time.toString().match(/\D/)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+	// function isValid(time: string): boolean {
+	// 	if (time.length == 0 || time.toString().match(/\D/)) {
+	// 		return false;
+	// 	} else {
+	// 		return true;
+	// 	}
+	// }
 </script>
 
 <div class="main">
