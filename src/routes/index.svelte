@@ -188,17 +188,7 @@
 		</div>
 		<div class="count"><div>{numWork + 1}</div></div>
 		<div class="time">
-			<svg
-				viewBox="0 0 100 100"
-				preserveAspectRatio="xMinYMid meet"
-				xmlns="http://www.w3.org/2000/svg"
-				xmlns:xlink="http://www.w3.org/1999/xlink"
-			>
-				<rect />
-				<text x="0" y="70" font-size="57"
-					>{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}</text
-				>
-			</svg>
+			{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}
 		</div>
 		<div class="state">
 			<div class="button">
@@ -304,20 +294,7 @@
 		width: 100%;
 		height: 100%;
 		user-select: none;
-		& > svg {
-			display: block;
-			width: 100%;
-			height: 100%;
-			& > rect {
-				width: 200%;
-				height: 200%;
-				fill: var(--background-color);
-				transition: 1s;
-			}
-			& > text {
-				fill: var(--foreground-color);
-			}
-		}
+		font-size: 5rem;
 	}
 	.state {
 		// Styling
