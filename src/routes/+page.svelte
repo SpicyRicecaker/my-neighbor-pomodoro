@@ -13,6 +13,8 @@
 
 	import { theme as t } from '$lib/theme';
 
+	const MILLIS_IN_SECOND = 60 * 1000;
+
 	let running = false;
 	let numWork = 0;
 
@@ -35,10 +37,10 @@
 	];
 
 	// Time left in our current state
-	let timeLeft: number = $config.work * 60 * 1000;
+	let timeLeft: number = $config.work * MILLIS_IN_SECOND;
 
 	// Automatic time
-	$: minLeft = Math.floor(timeLeft / (60 * 1000));
+	$: minLeft = Math.floor(timeLeft / MILLIS_IN_SECOND);
 	$: secLeft = Math.floor((timeLeft / 1000) % 60);
 
 	// Whether notifications have been accepeted by our user or not
@@ -60,15 +62,15 @@
 		state = newState;
 		switch (state) {
 			case State.Working: {
-				timeLeft = $config.work * 60 * 1000;
+				timeLeft = $config.work * MILLIS_IN_SECOND;
 				break;
 			}
 			case State.ShortBreaking: {
-				timeLeft = $config.shortBreak * 60 * 1000;
+				timeLeft = $config.shortBreak * MILLIS_IN_SECOND;
 				break;
 			}
 			case State.LongBreaking: {
-				timeLeft = $config.longBreak * 60 * 1000;
+				timeLeft = $config.longBreak * MILLIS_IN_SECOND;
 				break;
 			}
 		}
@@ -121,7 +123,7 @@
 				// update state, clock, and give notification
 				nextState(playNotification);
 			} else {
-				timerId = setTimeout(updateTiming, 500, date);
+				timerId = setTimeout(updateTiming, 1000, date);
 			}
 		}
 	};
