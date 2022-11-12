@@ -1,4 +1,5 @@
-import adapter from "@bun-community/sveltekit-adapter-bun"
+// import adapter from "@bun-community/sveltekit-adapter-bun"
+import adapter from '@sveltejs/adapter-node';
 import preprocess from "svelte-preprocess"
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -11,7 +12,6 @@ const config = {
     adapter: adapter({
       dynamic_origin: true,
     }),
-	// files: "lib"
   },
 }
 

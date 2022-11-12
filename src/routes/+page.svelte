@@ -102,6 +102,7 @@
 				break;
 			}
 		}
+		console.log('Playing notification');
 		if (playNotification) {
 			new Notification(notification);
 		}
@@ -197,13 +198,13 @@
 				{:else}
 					<Play on:click={toggleRunning} />
 				{/if}
-				<div on:click={ensureNextState}><Ff /></div>
+				<div on:click={ensureNextState} on:keydown={ensureNextState}><Ff /></div>
 			</div>
 		</div>
 	</div>
 </div>
 {#if notification !== 'denied' && notification !== 'granted'}
-	<div class="link notification" on:click={requestNotification}>
+	<div class="link notification" on:click={requestNotification} on:keydown={requestNotification}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-6 w-6"

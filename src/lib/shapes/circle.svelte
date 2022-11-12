@@ -4,6 +4,7 @@
 
 <svg
 	on:click
+	on:keydown
 	class:active
 	xmlns="http://www.w3.org/2000/svg"
 	class="icon icon-tabler icon-tabler-cookie"
