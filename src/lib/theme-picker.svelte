@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/env';
-	import { session } from '$app/stores';
+	import { browser } from '$app/environment';
+	// import { session } from '$app/stores';
 
 	import { selected_theme, themes } from './theme';
 
@@ -11,7 +11,7 @@
 			document.cookie = `theme=${new_theme};SameSite=None;Secure;Path=/;Expires=${daysToExpire}`;
 			console.log('setting cookie');
 			// trigger new load functions to actually interpret this cookie change
-			$session.user = {};
+			// $session.user = {};
 		}
 	}
 	$: updateCookie($selected_theme);
