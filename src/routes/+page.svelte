@@ -121,7 +121,7 @@
 				// update state, clock, and give notification
 				nextState(playNotification);
 			} else {
-				timerId = setTimeout(updateTiming, 1000, date);
+				timerId = setTimeout(updateTiming, 500, date);
 			}
 		}
 	};
