@@ -173,34 +173,34 @@
 />
 <audio bind:this={audio} src={audioSrc} />
 <div class="main">
-	<div
-		class="wrapper"
-		id={$t.variant === 'dark' ? 'dark' : ''}
-		style="width: {minLeft >= 100 ? '16rem' : '13rem'}"
-	>
+	<div class="wrapper" id={$t.variant === 'dark' ? 'dark' : ''}>
 		<div class="option">
 			<div>
 				{#each stateSvgArray as s, i}
-					<svelte:component
-						this={s.shape}
-						active={state === i}
-						on:click={() => setState(i, true)}
-					/>
+					<div>
+						<svelte:component
+							this={s.shape}
+							active={state === i}
+							on:click={() => setState(i, true)}
+						/>
+					</div>
 				{/each}
 			</div>
 		</div>
-		<div class="count"><div>{numWork + 1}</div></div>
 		<div class="time">
 			{minLeft.toString().padStart(2, '0')}:{secLeft.toString().padStart(2, '0')}
 		</div>
 		<div class="state">
-			<div class="button">
-				{#if running}
-					<Pause on:click={toggleRunning} />
-				{:else}
-					<Play on:click={toggleRunning} />
-				{/if}
-				<div on:click={ensureNextState} on:keydown={ensureNextState}><Ff /></div>
+			<div>
+				<div class="count"><div>{numWork + 1}</div></div>
+				<div class="button">
+					{#if running}
+						<Pause on:click={toggleRunning} />
+					{:else}
+						<Play on:click={toggleRunning} />
+					{/if}
+				</div>
+				<div class="next" on:click={ensureNextState} on:keydown={ensureNextState}><Ff /></div>
 			</div>
 		</div>
 	</div>
@@ -243,88 +243,90 @@
 <style lang="scss">
 	@import '../lib/styles.scss';
 
-	// #dark {
-	// 	box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.05);
-	// }
 	.wrapper {
+		width: 100%;
+		height: 100%;
 		position: relative;
 		align-self: center;
 		justify-self: center;
 
-		padding: 1rem 2rem 1rem 2rem;
+		max-height: 15rem;
 
-		border-radius: 1rem;
-		// box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]
-		// box-shadow: 1rem 1.5rem 3rem rgba(var(--backdrop), 0.2);
-
-		height: 9rem;
-		max-height: 9rem;
-
-		& > .count {
-			position: absolute;
-			top: 201%;
-			right: 60%;
-			color: var(--foreground-color);
-			opacity: 50%;
-			user-select: none;
-		}
+		display: grid;
+		grid-template-columns: minmax(0, 1fr), minmax(0, 5fr), minmax(0, 1fr);
 
 		& > .option {
-			position: absolute;
-			top: -90%;
-			left: 15%;
+			width: 100%;
 
-			width: 80%;
-
+			display: flex;
 			align-items: center;
-			justify-items: center;
+			justify-content: center;
+
 			& > div {
-				padding-left: 2rem;
-				padding-right: 2rem;
+				width: 30%;
+
 				display: grid;
 				grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+
+				& > * {
+					display: flex;
+					justify-content: center;
+				}
 			}
 		}
 	}
+
 	.main {
 		width: 100%;
 		height: 100%;
+
 		display: grid;
 
-		font-family: Arial, Helvetica, sans-serif;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+			sans-serif;
 	}
+
 	.time {
-		width: 100%;
-		height: 100%;
 		user-select: none;
 		font-size: 5rem;
+		display: grid;
+		align-items: center;
+		justify-content: center;
 	}
+
 	.state {
+		width: 100%;
 		// Styling
 		font-size: 1rem;
 
 		// Declare the right 1 will always be 2rem, otherwise fill
-
 		// Center the label by self, not each individual container
-		position: absolute;
 
-		top: 200%;
-		left: 0;
-		width: 100%;
+		display: flex;
+		justify-content: center;
 
-		display: grid;
+		& > div {
+			width: 30%;
 
-		& > .button {
-			align-self: center;
-			justify-self: center;
-			position: relative;
-			&:hover {
-				cursor: pointer;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+
+			& > * {
+				align-self: center;
+				justify-self: center;
 			}
-			& > div {
-				position: absolute;
-				top: 0;
-				left: 150%;
+
+			& > .button,
+			.next {
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			& > .count {
+				font-size: 0.9rem;
+				color: var(--foreground-color);
+				user-select: none;
 			}
 		}
 	}
